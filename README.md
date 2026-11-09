@@ -16,6 +16,19 @@ Cada atividade apresenta sua finalidade, uma situação realista, instruções e
 
 Os textos de biblioteca e loja são fictícios. Não há chat com IA real: a escrita e o atendimento usam regras didáticas, e as buscas usam cálculos locais. Estudos anteriores salvos continuam compatíveis e mantêm seus textos originais.
 
+## Aprendizado visual
+
+- Cenas vetoriais em SVG, desenhadas no código e empacotadas com o site, sem serviços ou imagens externas.
+- Abertura com três cenas selecionáveis: escrever, consultar fontes e acompanhar uma entrega.
+- Histórias em três quadros para ligar os conceitos a situações do cotidiano.
+- Roleta proporcional às probabilidades e convite que muda com a continuação sorteada.
+- Mapa ilustrativo de assuntos que reage às pistas da pergunta; as posições são fixas e não representam embeddings reais.
+- Caminho visual da consulta de fontes e recortes de papel que mostram o efeito do tamanho e da sobreposição dos trechos.
+- Cartões de avaliação baseados nas fontes realmente encontradas, ausentes e extras.
+- Rota de atendimento e bilhetes que mostram as consultas disponíveis e usadas.
+
+As cenas têm descrições acessíveis. As animações respeitam a preferência do dispositivo por movimento reduzido. As informações principais também aparecem em texto; nenhuma conclusão depende apenas de cor.
+
 ## Executar
 
 Requer Node.js 22.18+ (ou Node.js 24+) e npm.
