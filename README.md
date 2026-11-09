@@ -9,13 +9,14 @@ Um espaço de aprendizado de inteligência artificial para pessoas de qualquer �
 - **Como aproxima ideias:** uma biblioteca fictícia explica a busca por assuntos e as limitações do exemplo.
 - **Como consulta fontes:** acompanhe a procura de uma regra antes de orientar alguém.
 - **Oficina de pedidos:** monte pedidos com cartões de objetivo, contexto, formato e cuidados, antecipe o resultado e compare exemplos preparados.
+- **Converse com uma IA:** ative opcionalmente um modelo real no dispositivo e experimente uma conversa sem API paga.
 - **Experimente com textos:** compare buscas em regras da biblioteca ou textos próprios, com desafios cotidianos.
 - **Confira os resultados:** confira várias perguntas, leia as evidências e salve estudos no navegador.
 - **Veja a IA em ação:** acompanhe o atendimento de uma compra fictícia, com consultas, limites e falhas.
 
 Cada atividade apresenta sua finalidade, uma situação realista, instruções e o aprendizado esperado. Números de versão não aparecem na navegação. Os nomes técnicos são explicados ou ficam em detalhes opcionais.
 
-Os textos de biblioteca e loja são fictícios. Não há chat com IA real: a escrita e o atendimento usam regras didáticas, e as buscas usam cálculos locais. Estudos anteriores salvos continuam compatíveis e mantêm seus textos originais.
+Os textos de biblioteca e loja são fictícios. As atividades educativas usam regras didáticas e buscas locais. A seção “Converse com uma IA” oferece um modelo real opcional, executado no dispositivo. Estudos anteriores salvos continuam compatíveis e mantêm seus textos originais.
 
 ## Aprendizado visual
 
@@ -35,6 +36,22 @@ As cenas têm descrições acessíveis. As animações respeitam a preferência 
 Abra `#workshop`. Três situações fictícias: convite de aniversário, resumo de um aviso de condomínio e planejamento de um passeio em família. O usuário combina quatro tipos de informação no pedido, escolhe uma previsão antes de revelar a comparação e confere as respostas com a fonte. A previsão não precisa estar correta para continuar.
 
 As respostas são preparadas e seguem regras locais; não há chamada a LLM. O número de cartões selecionados não é apresentado como nota de qualidade. Alterar os cartões invalida a comparação anterior até uma nova execução. Cada situação inclui uma pergunta de verificação e progresso local. O pedido pode ser copiado ou baixado como `.txt`.
+
+## IA real no navegador
+
+Abra `#chat`. WebLLM 0.2.87 executa Qwen2.5-0.5B-Instruct em Web Worker, com WebGPU e respostas transmitidas progressivamente. O registro oficial da biblioteca define os arquivos de execução compatíveis. Navegadores com shader-f16 usam q4f16_1; os demais usam q4f32_1.
+
+- A biblioteca de execução e o worker só são carregados ao clicar em **Ativar IA neste dispositivo**. Não há download automático dos pesos ao abrir o site.
+- Os pesos têm aproximadamente 278 MB (f16) ou 309 MB (f32), além dos demais arquivos. O site informa cerca de 300 MB como estimativa e avisa que pode variar. A execução pode precisar de cerca de 1 GB ou mais de memória gráfica.
+- Pesos e configuração são baixados publicamente do Hugging Face/MLC; o WebAssembly vem do GitHub/MLC. Não há token, segredo, proxy, serviço de inferência pago ou envio das mensagens a esses servidores.
+- Verificação de HTTPS, WebGPU e adaptador antes da ativação; detecção não garante memória suficiente. Falhas de GPU, download e contexto são apresentadas sem fingir uma resposta.
+- Até 1200 caracteres por pedido, 320 tokens de resposta e histórico limitado aos últimos três pares completos, dentro de um orçamento de caracteres. Respostas podem atingir o limite; o usuário é avisado. O modelo é pequeno, pode errar e não acessa a internet.
+- A conversa fica somente na memória da aba e sobrevive à navegação interna. Recarregar apaga as mensagens. Persistência de conversas/resumable generation não é habilitada.
+- Interromper pede parada ao modelo; se não responder em oito segundos, o worker é encerrado. Cancelar o carregamento/desativar também encerra o worker e invalida operações pendentes.
+- O cache de arquivos usa Cache Storage. Há controle para remover os dois modelos do cache do site, sem prometer funcionamento offline.
+- **Experimentar na IA real**, na oficina, apenas prepara o texto e abre a conversa; não ativa o modelo nem envia o pedido automaticamente.
+
+A integração é verificada por TypeScript/build, testes de política de histórico/cancelamento/registro de modelos e checagem dos endpoints públicos. A qualidade e velocidade precisam ser avaliadas em dispositivos com WebGPU; testes sem GPU não comprovam inferência real.
 
 ## Executar
 
