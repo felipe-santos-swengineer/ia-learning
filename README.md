@@ -1,6 +1,6 @@
 # nexo — IA para quem desenvolve
 
-V3 de uma plataforma educacional gratuita em português. React, TypeScript e Vite; aplicação estática, sem backend, contas, analytics ou APIs pagas. Fontes e ícones são empacotados localmente; o site não depende de CDN.
+V5 de uma plataforma educacional gratuita em português. React, TypeScript e Vite; aplicação estática, sem backend, contas, analytics ou APIs pagas. Fontes e ícones são empacotados localmente; o site não depende de CDN.
 
 ## Executar
 
@@ -63,3 +63,15 @@ Abra `#evaluation` pelo menu Avaliação V3.
 As métricas avaliam documentos únicos: cada documento aparece na posição de seu melhor trecho. Aqui k representa fontes, enquanto no laboratório V2 representa trechos. Precision@k divide por k, inclusive vagas não preenchidas. Recall conta fontes esperadas únicas. MRR é a média do inverso da posição da primeira fonte relevante, ou zero quando ausente. As médias são macro, por pergunta. Não avaliamos a correção de respostas de LLM nem a suficiência do trecho. Fontes esperadas são rótulos humanos editáveis.
 
 Limites: 12 documentos, 200 mil caracteres no total, 100 mil por documento e 30 perguntas. Cada pergunta exige pelo menos uma fonte esperada. Projetos são locais ao navegador e podem desaparecer ao limpar dados do site; exporte uma cópia. Dados não são enviados a servidores.
+
+## Novidades da V5
+
+Abra `#agents` pelo menu Agentes V5. A numeração passa diretamente da V3 à V5 conforme solicitado.
+
+- Quatro cenários: consulta de pedido, encadeamento com entrega, timeout e nota externa com instrução indevida.
+- Máquina de estados observável: propor, validar, executar, observar e concluir.
+- Contratos JSON inspecionáveis, argumentos editáveis e validação antes de executar.
+- Orçamento de chamadas, política de retry e parada controlada sem inventar resultados.
+- Histórico exportável em JSON e três desafios com progresso salvo no navegador.
+
+Não há LLM: o planejador e a resposta são determinísticos e seguem regras. As ferramentas são funções locais sobre pedidos fictícios. O timeout é injetado. O histórico é de ações da aplicação, não raciocínio interno. Ignorar uma nota por regra fixa não demonstra proteção geral contra prompt injection em modelos reais.
