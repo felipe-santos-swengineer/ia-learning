@@ -1,7 +1,7 @@
 import { buildPrompt, workshopScenarios } from './prompt-workshop.ts';
 import type { Choices } from './prompt-workshop.ts';
 export const missionScenario=workshopScenarios[0];
-export const missionSteps=['Conheça a festa','Monte o pedido','Experimente','Confira os detalhes','Leve o aprendizado'];
+export const missionSteps=['Conheça a festa','Monte o pedido','Experimente','Confira os detalhes','Ajuste e compare','Leve o aprendizado'];
 export type Verdict='supported'|'missing'|'unsupported';
 export type Review=Partial<Record<'name'|'when'|'place'|'address',Verdict>>;
 export const reviewFields=[
@@ -16,4 +16,4 @@ export function auditReview(review:Review,origin:'real'|'prepared'){
  const corrections=origin==='prepared'?reviewFields.filter(f=>review[f.id]!==f.prepared).map(f=>({id:f.id,hint:f.hint})):[];
  return {complete,canContinue:complete&&(origin==='real'||corrections.length===0),corrections,counts:{supported:reviewFields.filter(f=>review[f.id]==='supported').length,missing:reviewFields.filter(f=>review[f.id]==='missing').length,unsupported:reviewFields.filter(f=>review[f.id]==='unsupported').length}};
 }
-export function missionSkills(choices:Choices,review:Review){const audit=auditReview(review,'real');return [{title:'Dar contexto',detail:choices.context?'Você incluiu os dados da festa no pedido.':'Você viu o que acontece quando os dados da festa não entram no pedido.'},{title:'Reconhecer limites',detail:choices.limits?'Você pediu para não inventar um endereço.':'Você pode melhorar o pedido explicitando o que não foi informado.'},{title:'Conferir a resposta',detail:`Na sua revisão: conferem com a ficha: ${audit.counts.supported}. Ausentes ou incompletos: ${audit.counts.missing}. Alterados ou sem apoio: ${audit.counts.unsupported}.`}];}
+export function missionSkills(choices:Choices,review:Review){const audit=auditReview(review,'real');return [{title:'Dar contexto',detail:choices.context?'Você incluiu os dados da festa no pedido.':'Os dados da festa não entram no seu pedido. Inclua-os quando forem necessários para a resposta.'},{title:'Reconhecer limites',detail:choices.limits?'Você pediu para não inventar um endereço.':'Você pode melhorar o pedido explicitando o que não foi informado.'},{title:'Conferir a resposta',detail:`Na sua revisão: conferem com a ficha: ${audit.counts.supported}. Ausentes ou incompletos: ${audit.counts.missing}. Alterados ou sem apoio: ${audit.counts.unsupported}.`}];}

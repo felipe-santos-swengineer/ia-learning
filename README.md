@@ -141,7 +141,7 @@ Os testes verificam o contrato de aquecimento, ausência de reset por mensagem, 
 
 ## Missão guiada
 
-Abra `#mission`, também disponível como entrada principal da página inicial. Cinco etapas: ficha de uma festa fictícia, montagem do pedido, experiência, conferência e conclusão personalizada.
+Abra `#mission`, também disponível como entrada principal da página inicial. Seis etapas: ficha de uma festa fictícia, montagem do pedido, experiência, conferência, ajuste com comparação e conclusão personalizada.
 
 - A IA local é opcional, com o mesmo aviso de download e compatibilidade. Usa o modelo já ativo quando possível; o pedido da missão não recebe o histórico do chat e não é adicionado a ele.
 - Uma execução da missão bloqueia outras gerações no mesmo worker. Ao sair durante uma geração, ou escolher o exemplo preparado, a execução é cancelada. Ativações iniciadas pela missão também são canceladas ao sair ou escolher o exemplo.
@@ -150,3 +150,16 @@ Abra `#mission`, também disponível como entrada principal da página inicial. 
 - Só a conclusão fica em localStorage. O pedido e a resposta da missão são descartados ao sair. A conclusão inclui o caminho usado (IA ou preparado) e pode ser refeita.
 
 Os testes cobrem o pedido, limites de entrada, evidências do exemplo preparado, ausência de julgamento automático de respostas reais e conclusão baseada nas escolhas.
+
+## Segunda tentativa na missão
+
+A primeira versão do convite, seu pedido e a revisão ficam preservados enquanto o aluno ajusta a segunda tentativa. A comparação inclui:
+
+- Cartões para alterar objetivo, contexto, formato e cuidados, mais uma orientação de revisão com até 250 caracteres.
+- Geração local opcional, sem misturar histórico do chat, ou segundo exemplo preparado fixo e explicitamente identificado.
+- Duas versões lado a lado com busca literal de detalhes e destaque do endereço errado conhecido no primeiro exemplo preparado. Respostas reais não recebem detecção automática de invenções.
+- Revisão obrigatória dos quatro detalhes da segunda resposta. As evidências do exemplo preparado são conhecidas; a revisão de texto real é humana.
+- Cartões de melhoria, regressão, ausência e permanência calculados a partir das marcações. Mudanças de origem entre IA e exemplo preparado são sinalizadas para não atribuir o resultado só ao pedido.
+- Uma ação concreta na conclusão: confirmar o endereço verdadeiro com Nina. Remover uma rua inventada não informa o endereço correto.
+
+Alterar o pedido invalida a comparação até gerar ou escolher um exemplo novamente. Voltar da conclusão restaura a segunda tentativa enquanto a missão estiver aberta. Sair da página descarta os textos; só a conclusão é salva, com o registro de duas tentativas.
