@@ -1,6 +1,20 @@
-# nexo — IA para quem desenvolve
+# nexo — IA para a vida real
 
-V5 de uma plataforma educacional gratuita em português. React, TypeScript e Vite; aplicação estática, sem backend, contas, analytics ou APIs pagas. Fontes e ícones são empacotados localmente; o site não depende de CDN.
+Um espaço de aprendizado de inteligência artificial para pessoas de qualquer área, sem exigir programação. A aplicação estática funciona no navegador e no GitHub Pages, sem backend ou APIs pagas.
+
+## Como o aprendizado está organizado
+
+- **Comece aqui:** objetivo da aplicação e mapa das atividades.
+- **Como a IA escreve:** um convite de festa mostra a diferença entre texto provável e informação correta.
+- **Como aproxima ideias:** uma biblioteca fictícia explica a busca por assuntos e as limitações do exemplo.
+- **Como consulta fontes:** acompanhe a procura de uma regra antes de orientar alguém.
+- **Experimente com textos:** compare buscas em regras da biblioteca ou textos próprios, com desafios cotidianos.
+- **Confira os resultados:** confira várias perguntas, leia as evidências e salve estudos no navegador.
+- **Veja a IA em ação:** acompanhe o atendimento de uma compra fictícia, com consultas, limites e falhas.
+
+Cada atividade apresenta sua finalidade, uma situação realista, instruções e o aprendizado esperado. Números de versão não aparecem na navegação. Os nomes técnicos são explicados ou ficam em detalhes opcionais.
+
+Os textos de biblioteca e loja são fictícios. Não há chat com IA real: a escrita e o atendimento usam regras didáticas, e as buscas usam cálculos locais. Estudos anteriores salvos continuam compatíveis e mantêm seus textos originais.
 
 ## Executar
 

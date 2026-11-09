@@ -25,5 +25,5 @@ test('missions fail initially and pass after meaningful fixes', () => {
 test('context includes source provenance and no invented answer', () => {
   const m=missions[1];const ranked=searchSources(m.sources,m.query,{...m.initial,topK:2});
   const context=buildContext(m.query,ranked);
-  assert.ok(context.includes('[1]'));assert.ok(context.includes('palavras 1'));assert.ok(context.includes(m.query));assert.ok(context.includes('1000'));
+  assert.ok(context.includes('[1]'));assert.ok(context.includes('palavras 1'));assert.ok(context.includes(m.query));assert.ok(context.includes('12 horas'));
 });

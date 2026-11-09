@@ -21,7 +21,7 @@ export function evaluate(project: Project) {
 }
 export function average(values: Metrics[]) { const n=values.length||1;return {precision:values.reduce((s,m)=>s+m.precision,0)/n,recall:values.reduce((s,m)=>s+m.recall,0)/n,mrr:values.reduce((s,m)=>s+m.rr,0)/n}; }
 export function validateProject(value: unknown): Project {
-  const fail=()=>{throw new Error('Projeto inválido. Use um JSON exportado pela bancada V3, com fontes, perguntas e configurações válidas.');};
+  const fail=()=>{throw new Error('Não foi possível abrir esta cópia. Use um arquivo baixado em “Confira os resultados”, com textos e perguntas completos.');};
   if(!value || typeof value!=='object')return fail();
   const p=value as Project;
   if(p.version!==3 || typeof p.id!=='string' || !p.id || p.id.length>100 || typeof p.name!=='string' || !p.name.trim() || p.name.length>100 || typeof p.updated!=='string')return fail();
