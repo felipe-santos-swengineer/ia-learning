@@ -1,0 +1,7 @@
+import { validateProject } from './evaluation.ts';
+import type { Project } from './evaluation.ts';
+function database(): Promise<IDBDatabase> {return new Promise((resolve,reject)=>{if(!globalThis.indexedDB){reject(new Error('Armazenamento local indisponível. Exporte seu projeto em JSON.'));return;}const request=indexedDB.open('nexo-projects',1);request.onupgradeneeded=()=>request.result.createObjectStore('projects',{keyPath:'id'});request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);request.onblocked=()=>reject(new Error('Feche outras abas do nexo e tente novamente.'));});}
+async function transaction<T>(mode: IDBTransactionMode, action:(store:IDBObjectStore)=>IDBRequest<T>):Promise<T>{const db=await database();return new Promise((resolve,reject)=>{const tx=db.transaction('projects',mode);const request=action(tx.objectStore('projects'));let result:T;request.onsuccess=()=>{result=request.result;};tx.oncomplete=()=>{db.close();resolve(result);};tx.onabort=tx.onerror=()=>{db.close();reject(tx.error||new Error('Não foi possível acessar os projetos locais.'));};});}
+export async function listProjects():Promise<Project[]>{const rows=await transaction('readonly',s=>s.getAll());return rows.map(validateProject).sort((a,b)=>b.updated.localeCompare(a.updated));}
+export async function saveProject(project:Project){const valid=validateProject(project);await transaction('readwrite',s=>s.put(valid));}
+export async function deleteProject(id:string){await transaction('readwrite',s=>s.delete(id));}

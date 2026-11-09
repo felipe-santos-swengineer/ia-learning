@@ -1,6 +1,6 @@
 # nexo — IA para quem desenvolve
 
-V2 de uma plataforma educacional gratuita em português. React, TypeScript e Vite; aplicação estática, sem backend, contas, analytics ou APIs pagas. Fontes e ícones são empacotados localmente; o site não depende de CDN.
+V3 de uma plataforma educacional gratuita em português. React, TypeScript e Vite; aplicação estática, sem backend, contas, analytics ou APIs pagas. Fontes e ícones são empacotados localmente; o site não depende de CDN.
 
 ## Executar
 
@@ -49,3 +49,17 @@ Abra `#workbench` pelo menu Laboratório V2.
 - Resolva três missões: preservar avisos de segurança, recuperar fontes suficientes e reformular consultas.
 
 A busca TF-IDF é lexical, sem embeddings treinados nem compreensão de sinônimos. Cada configuração calcula seu próprio índice; os scores entre A e B não são diretamente comparáveis. O pipeline termina no contexto e não chama um LLM. Documentos ficam na memória da aba; recarregar os remove. O progresso das missões fica em localStorage.
+
+## Novidades da V3
+
+Abra `#evaluation` pelo menu Avaliação V3.
+
+- Dez perguntas iniciais, com edição das fontes esperadas e até 30 perguntas por projeto.
+- Comparação A/B em lote, Precision@k, Recall@k e MRR com fórmulas e evidências por pergunta.
+- Filtros de falhas: sem resultados, fontes ausentes, fontes não esperadas e regressão de cobertura.
+- Projetos salvos em IndexedDB, com abertura, exclusão e importação/exportação JSON validada.
+- Exportação de relatório com o projeto congelado e os resultados para reprodução.
+
+As métricas avaliam documentos únicos: cada documento aparece na posição de seu melhor trecho. Aqui k representa fontes, enquanto no laboratório V2 representa trechos. Precision@k divide por k, inclusive vagas não preenchidas. Recall conta fontes esperadas únicas. MRR é a média do inverso da posição da primeira fonte relevante, ou zero quando ausente. As médias são macro, por pergunta. Não avaliamos a correção de respostas de LLM nem a suficiência do trecho. Fontes esperadas são rótulos humanos editáveis.
+
+Limites: 12 documentos, 200 mil caracteres no total, 100 mil por documento e 30 perguntas. Cada pergunta exige pelo menos uma fonte esperada. Projetos são locais ao navegador e podem desaparecer ao limpar dados do site; exporte uma cópia. Dados não são enviados a servidores.
