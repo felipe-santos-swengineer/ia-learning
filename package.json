@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --experimental-strip-types --test src/engine.test.ts src/retrieval.test.ts src/evaluation.test.ts src/projects.test.ts src/agent-engine.test.ts src/prompt-workshop.test.ts src/chat-policy.test.ts src/chat-stream.test.ts"
+    "test": "node --experimental-strip-types --test src/engine.test.ts src/retrieval.test.ts src/evaluation.test.ts src/projects.test.ts src/agent-engine.test.ts src/prompt-workshop.test.ts src/chat-policy.test.ts src/chat-stream.test.ts src/guided-mission.test.ts"
   },
   "dependencies": {
     "@mlc-ai/web-llm": "^0.2.87",

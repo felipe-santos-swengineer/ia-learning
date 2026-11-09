@@ -5,6 +5,7 @@ Um espaço de aprendizado de inteligência artificial para pessoas de qualquer �
 ## Como o aprendizado está organizado
 
 - **Comece aqui:** objetivo da aplicação e mapa das atividades.
+- **Missão guiada:** um percurso único para montar um convite, experimentar e conferir detalhes com a ficha da festa.
 - **Como a IA escreve:** um convite de festa mostra a diferença entre texto provável e informação correta.
 - **Como aproxima ideias:** uma biblioteca fictícia explica a busca por assuntos e as limitações do exemplo.
 - **Como consulta fontes:** acompanhe a procura de uma regra antes de orientar alguém.
@@ -137,3 +138,15 @@ Não há LLM: o planejador e a resposta são determinísticos e seguem regras. A
 - São exibidos o tempo de espera, tempo até o primeiro texto e tempo total. Após oito segundos sem texto há um aviso; o stream falha com uma mensagem explícita após 30 segundos sem primeiro texto, 20 segundos sem avanço posterior ou 60 segundos no total. O worker é encerrado na falha.
 
 Os testes verificam o contrato de aquecimento, ausência de reset por mensagem, primeira exibição, cancelamento e limites de espera. Eles não medem ganho de velocidade em uma GPU real; desempenho depende de navegador, hardware, driver e carga do dispositivo.
+
+## Missão guiada
+
+Abra `#mission`, também disponível como entrada principal da página inicial. Cinco etapas: ficha de uma festa fictícia, montagem do pedido, experiência, conferência e conclusão personalizada.
+
+- A IA local é opcional, com o mesmo aviso de download e compatibilidade. Usa o modelo já ativo quando possível; o pedido da missão não recebe o histórico do chat e não é adicionado a ele.
+- Uma execução da missão bloqueia outras gerações no mesmo worker. Ao sair durante uma geração, ou escolher o exemplo preparado, a execução é cancelada. Ativações iniciadas pela missão também são canceladas ao sair ou escolher o exemplo.
+- O exemplo preparado é fixo, explicitamente identificado e contém um endereço sem apoio. Sua análise tem evidências conhecidas e pistas; não pretende reproduzir as escolhas feitas no pedido.
+- Na resposta real, as marcações de nome, horário, local e endereço são uma revisão humana, não uma nota automática de correção.
+- Só a conclusão fica em localStorage. O pedido e a resposta da missão são descartados ao sair. A conclusão inclui o caminho usado (IA ou preparado) e pode ser refeita.
+
+Os testes cobrem o pedido, limites de entrada, evidências do exemplo preparado, ausência de julgamento automático de respostas reais e conclusão baseada nas escolhas.
