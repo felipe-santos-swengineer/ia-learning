@@ -45,7 +45,7 @@ Abra `#chat`. WebLLM 0.2.87 executa Qwen2.5-0.5B-Instruct em Web Worker, com Web
 - Os pesos têm aproximadamente 278 MB (f16) ou 309 MB (f32), além dos demais arquivos. O site informa cerca de 300 MB como estimativa e avisa que pode variar. A execução pode precisar de cerca de 1 GB ou mais de memória gráfica.
 - Pesos e configuração são baixados publicamente do Hugging Face/MLC; o WebAssembly vem do GitHub/MLC. Não há token, segredo, proxy, serviço de inferência pago ou envio das mensagens a esses servidores.
 - Verificação de HTTPS, WebGPU e adaptador antes da ativação; detecção não garante memória suficiente. Falhas de GPU, download e contexto são apresentadas sem fingir uma resposta.
-- Até 1200 caracteres por pedido, 320 tokens de resposta e histórico limitado aos últimos três pares completos, dentro de um orçamento de caracteres. Respostas podem atingir o limite; o usuário é avisado. O modelo é pequeno, pode errar e não acessa a internet.
+- Até 1200 caracteres por pedido, 160 tokens de resposta (48 para cumprimentos) e histórico limitado aos últimos três pares completos, dentro de um orçamento de caracteres. Respostas podem atingir o limite; o usuário é avisado. O modelo é pequeno, pode errar e não acessa a internet.
 - A conversa fica somente na memória da aba e sobrevive à navegação interna. Recarregar apaga as mensagens. Persistência de conversas/resumable generation não é habilitada.
 - Interromper pede parada ao modelo; se não responder em oito segundos, o worker é encerrado. Cancelar o carregamento/desativar também encerra o worker e invalida operações pendentes.
 - O cache de arquivos usa Cache Storage. Há controle para remover os dois modelos do cache do site, sem prometer funcionamento offline.
@@ -126,3 +126,14 @@ Abra `#agents` pelo menu Agentes V5. A numeração passa diretamente da V3 à V5
 - Histórico exportável em JSON e três desafios com progresso salvo no navegador.
 
 Não há LLM: o planejador e a resposta são determinísticos e seguem regras. As ferramentas são funções locais sobre pedidos fictícios. O timeout é injetado. O histórico é de ações da aplicação, não raciocínio interno. Ignorar uma nota por regra fixa não demonstra proteção geral contra prompt injection em modelos reais.
+
+## Latência da conversa
+
+- A ativação só termina depois de um teste real de geração de oito tokens, para executar o caminho de preparação da GPU antes da primeira pergunta. O tempo desse teste aparece na interface.
+- O código não chama resetChat a cada mensagem: o WebLLM reutiliza o cache de atenção quando o histórico corresponde e reconstrói automaticamente quando necessário. O reset explícito acontece apenas após o teste inicial para descartar a conversa de aquecimento.
+- A instrução fixa foi encurtada. Cumprimentos continuam sendo respondidos pelo modelo, com um limite de 48 tokens; demais pedidos usam até 160. Não há resposta pronta disfarçada de IA.
+- O adaptador da verificação usa a mesma preferência high-performance do runtime WebLLM.
+- A primeira parte de texto é exibida imediatamente; atualizações seguintes são agrupadas em intervalos de pelo menos 60 ms para reduzir renderizações.
+- São exibidos o tempo de espera, tempo até o primeiro texto e tempo total. Após oito segundos sem texto há um aviso; o stream falha com uma mensagem explícita após 30 segundos sem primeiro texto, 20 segundos sem avanço posterior ou 60 segundos no total. O worker é encerrado na falha.
+
+Os testes verificam o contrato de aquecimento, ausência de reset por mensagem, primeira exibição, cancelamento e limites de espera. Eles não medem ganho de velocidade em uma GPU real; desempenho depende de navegador, hardware, driver e carga do dispositivo.
