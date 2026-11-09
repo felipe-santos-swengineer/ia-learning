@@ -8,6 +8,7 @@ Um espaço de aprendizado de inteligência artificial para pessoas de qualquer �
 - **Como a IA escreve:** um convite de festa mostra a diferença entre texto provável e informação correta.
 - **Como aproxima ideias:** uma biblioteca fictícia explica a busca por assuntos e as limitações do exemplo.
 - **Como consulta fontes:** acompanhe a procura de uma regra antes de orientar alguém.
+- **Oficina de pedidos:** monte pedidos com cartões de objetivo, contexto, formato e cuidados, antecipe o resultado e compare exemplos preparados.
 - **Experimente com textos:** compare buscas em regras da biblioteca ou textos próprios, com desafios cotidianos.
 - **Confira os resultados:** confira várias perguntas, leia as evidências e salve estudos no navegador.
 - **Veja a IA em ação:** acompanhe o atendimento de uma compra fictícia, com consultas, limites e falhas.
@@ -28,6 +29,12 @@ Os textos de biblioteca e loja são fictícios. Não há chat com IA real: a esc
 - Rota de atendimento e bilhetes que mostram as consultas disponíveis e usadas.
 
 As cenas têm descrições acessíveis. As animações respeitam a preferência do dispositivo por movimento reduzido. As informações principais também aparecem em texto; nenhuma conclusão depende apenas de cor.
+
+## Oficina de pedidos
+
+Abra `#workshop`. Três situações fictícias: convite de aniversário, resumo de um aviso de condomínio e planejamento de um passeio em família. O usuário combina quatro tipos de informação no pedido, escolhe uma previsão antes de revelar a comparação e confere as respostas com a fonte. A previsão não precisa estar correta para continuar.
+
+As respostas são preparadas e seguem regras locais; não há chamada a LLM. O número de cartões selecionados não é apresentado como nota de qualidade. Alterar os cartões invalida a comparação anterior até uma nova execução. Cada situação inclui uma pergunta de verificação e progresso local. O pedido pode ser copiado ou baixado como `.txt`.
 
 ## Executar
 
