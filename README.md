@@ -1,6 +1,6 @@
 # nexo — IA para quem desenvolve
 
-V1 de uma plataforma educacional gratuita em português. React, TypeScript e Vite; aplicação estática, sem backend, contas, analytics ou APIs pagas. Fontes e ícones são empacotados localmente; o site não depende de CDN.
+V2 de uma plataforma educacional gratuita em português. React, TypeScript e Vite; aplicação estática, sem backend, contas, analytics ou APIs pagas. Fontes e ícones são empacotados localmente; o site não depende de CDN.
 
 ## Executar
 
@@ -37,3 +37,15 @@ O endereço será `https://USUARIO.github.io/REPOSITORIO/`. O build usa caminhos
 - O site não envia as entradas dos laboratórios para servidores. Links externos na página Sobre levam às fontes quando abertos.
 
 Os tempos por módulo são estimativas editoriais. GitHub Pages tem limites de uso definidos pelo GitHub. Não há dependência de serviços com cobrança por consumo.
+
+## Novidades da V2
+
+Abra `#workbench` pelo menu Laboratório V2.
+
+- Importe documentos UTF-8 .txt e .md (100 KB por arquivo), ou cole textos. A base aceita até 12 documentos e 200 mil caracteres.
+- Compare tamanho de trecho, sobreposição e top-k sobre a mesma base e pergunta.
+- Inspecione documentos, trechos, índice TF-IDF, ranking lexical e contexto com referências à posição na fonte.
+- Faça uma previsão e exporte o experimento completo em JSON. O arquivo contém os documentos importados.
+- Resolva três missões: preservar avisos de segurança, recuperar fontes suficientes e reformular consultas.
+
+A busca TF-IDF é lexical, sem embeddings treinados nem compreensão de sinônimos. Cada configuração calcula seu próprio índice; os scores entre A e B não são diretamente comparáveis. O pipeline termina no contexto e não chama um LLM. Documentos ficam na memória da aba; recarregar os remove. O progresso das missões fica em localStorage.
